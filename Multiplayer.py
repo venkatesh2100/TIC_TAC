@@ -5,7 +5,16 @@ app = Flask(__name__)
 CORS(app)
 
 def create_board():
-    return [[' ' for _ in range(3)] for _ in range(3)]
+    board = []
+    for _ in range(3):
+        board.append([' ' for _ in range(3)])
+    return board
+
+def displayBoard(board):
+    for row in board():
+        print("|".join(row))
+        print("*"*5)
+
 
 def check_winner(board, player):
     for row in board:
@@ -16,16 +25,19 @@ def check_winner(board, player):
             return True
     if all([board[i][i] == player for i in range(3)]) or all([board[i][2 - i] == player for i in range(3)]):
         return True
-    return False
+    return False      
 
 def check_draw(board):
     return all([cell != ' ' for row in board for cell in row])
+
 
 def make_move(board, row, col, player):
     if board[row][col] == ' ':
         board[row][col] = player
         return True
     return False
+
+
 
 def minimax(board, depth, is_maximizing, ai_player, human_player):
     if check_winner(board, ai_player):
@@ -70,36 +82,20 @@ def get_best_move(board, ai_player, human_player):
                     best_move = (row, col)
     return best_move
 
+
 @app.route('/move', methods=['POST'])
 def move():
     data = request.json
     board = data['board']
     player = data['player']
-    player_one = data.get('playerOne')
-    player_two = data.get('playerTwo')
-    
-    if player == player_one:
+    if player == 'AI':
+        row, col = get_best_move(board, 'O', 'X')
+        make_move(board, row, col, 'O')
+    else:
         row, col = data['move']
         make_move(board, row, col, 'X')
-        winner = player if check_winner(board, 'X') else None
-    elif player == player_two:
-        row, col = data['move']
-        make_move(board, row, col, 'O')
-        winner = player if check_winner(board, 'O') else None
-    else:
-        ai_player = 'O'
-        human_player = 'X'
-        best_move = get_best_move(board, ai_player, human_player)
-        if best_move:
-            row, col = best_move
-            make_move(board, row, col, ai_player)
-            winner = 'AI' if check_winner(board, ai_player) else None
-
-    return jsonify({
-        'board': board,
-        'winner': winner,
-        'draw': check_draw(board)
-    })
+    return jsonify({'board': board, 'winner': check_winner(board, 'O') or check_winner(board, 'X'), 'draw': check_draw(board)})
 
 if __name__ == '__main__':
     app.run(debug=True)
+
