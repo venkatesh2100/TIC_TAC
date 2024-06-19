@@ -1,30 +1,41 @@
 # Tic Tac Toe Game
 
-This is a simple Tic Tac Toe game implemented using React for the frontend and Flask for the backend. The game supports both single-player and multiplayer modes.
+## Overview
+
+This was my final project to conclude the CS50  Introduction to Programming with Python.
+
+This is a full-stack Tic Tac Toe game that allows users to play either in single-player mode against an AI or in multiplayer mode against another player. The application utilizes Flask for the backend and React for the frontend, providing a seamless and interactive gaming experience.
 
 ## Features
 
-- **Single Player Mode**: Play against an AI opponent.
-- **Multiplayer Mode**: Play against another player locally.
+- **Single Player Mode**: Play against an AI that uses the Minimax algorithm for optimal moves.
+- **Multiplayer Mode**: Play against another player on the same device.
+- **Dynamic Gameplay**: The board updates in real-time with each player's move.
+- **Game Over Detection**: Detects and announces the winner or a draw.
 
 ## Technologies Used
 
-- **Frontend**: React
-- **Backend**: Flask
-- **Communication**: Axios for HTTP requests
-- **Styling**: CSS
+- **Flask**: Used for building the backend server.
+- **React**: Used for building the frontend user interface.
+- **Axios**: For making HTTP requests from the frontend to the backend.
+- **HTML/CSS**: Used for styling and structuring the frontend components.
+- **JavaScript**: Used for implementing the game logic on the frontend.
 
-## Getting Started
+## Pictures
 
-Follow these instructions to get the project up and running on your local machine.
+- **Game Board**: Displays the current state of the game.
+- **Winner Announcement**: Shows a message when a player wins.
+- **Draw Announcement**: Shows a message when the game is a draw.
+- **Responsive Design**: Adapts well to mobile devices.
 
-### Prerequisites
+## Demonstration
 
-You need to have Node.js and Python installed on your machine.
+For the CS50 final project, you have to make a video showing your project. Here's the demonstration video for my Tic Tac Toe game:
+[My Final Project Presentation](https://www.youtube.com/my-final-project-presentation)
 
-### Installation
+## Installation
 
-1. Clone the repository:
+Clone the repository:
 
-   ```bash
-   git clone https://github.com/your-username/tic-tac-toe.git
+```bash
+git clone <repository-url>
